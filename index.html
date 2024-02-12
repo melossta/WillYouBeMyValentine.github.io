@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine Love</title>
+    <link rel="icon" href="rsz_1rsz_cursor.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="content">
+        <h1 id="valentineText">Will you be my Valentine Love ?</h1>
+        
+
+        <!-- Yes and No buttons -->
+        <button id="yes-button" class="button">Yes</button>
+        <button id="no-button" class="button">No</button>
+    </div>
+
+    <div class="gif-overlay">
+        <img id="gif-img" src="buba.gif" alt="Bubu Dudu Love GIF">
+    </div>
+    <div id="gif-container"></div>
+    <div id="particles-container"></div>
+    <audio id="background-music" src="SnapTik.ltd_1707757352.mp3" preload="auto"></audio>
+
+    <script>
+        const yesButton = document.getElementById('yes-button');
+        const noButton = document.getElementById('no-button');
+        const particlesContainer = document.getElementById('particles-container');
+        let intervalId;
+        let particlesMode = 'normal'; // Default mode is 'normal'
+
+        yesButton.addEventListener('mouseenter', startParticles);
+        yesButton.addEventListener('mouseleave', stopParticles);
+        yesButton.addEventListener('click', toggleParticlesMode);
+        noButton.addEventListener('mouseenter', moveNoButton);
+
+        function startParticles() {
+            if (particlesMode === 'normal') {
+                intervalId = setInterval(createRandomParticle, 100); // Normal mode
+            } else if (particlesMode === 'crazy') {
+                intervalId = setInterval(createCrazyParticle, 50); // Crazy mode
+            }
+        }
+
+        function stopParticles() {
+            clearInterval(intervalId);
+        }
+
+        function createRandomParticle() {
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            const particleCount = 10; // Adjust particle count as needed
+
+            for (let i = 0; i < particleCount; i++) {
+                const x = Math.random() * windowWidth;
+                const y = Math.random() * windowHeight;
+
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+
+                particlesContainer.appendChild(particle);
+
+                // Remove particle after animation
+                setTimeout(() => {
+                    particle.style.opacity = '0';
+                }, 500); // Duration of the particle's visibility
+                setTimeout(() => {
+                    particle.remove();
+                }, 1000); // Total duration of the animation
+            }
+        }
+
+        function createCrazyParticle() {
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            const particleCount = 10; // Increase the number of particles
+
+            for (let i = 0; i < particleCount; i++) {
+                const x = Math.random() * windowWidth;
+                const y = Math.random() * windowHeight;
+
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+
+                particlesContainer.appendChild(particle);
+
+                // Randomize particle movement
+                const randomX = Math.random() * 400 - 200; // Random value between -200 and 200
+                const randomY = Math.random() * 400 - 200; // Random value between -200 and 200
+                particle.style.animation = `particleAnimationCrazy 1s forwards`;
+                particle.style.transform = `translate(${randomX}px, ${randomY}px)`;
+
+                // Remove particle after animation
+                setTimeout(() => {
+                    particle.style.opacity = '0';
+                }, 500); // Duration of the particle's visibility
+                setTimeout(() => {
+                    particle.remove();
+                }, 1000); // Total duration of the animation
+            }
+        }
+
+        function getRandomPosition() {
+            const maxX = window.innerWidth - noButton.offsetWidth;
+            const maxY = window.innerHeight - noButton.offsetHeight;
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            return { x: randomX, y: randomY };
+        }
+
+        function moveNoButton() {
+            const position = getRandomPosition();
+            noButton.style.position = 'fixed'; // Make sure button position is fixed
+            noButton.style.left = position.x + 'px';
+            noButton.style.top = position.y + 'px';
+        }
+
+        function toggleParticlesMode() {
+            if (particlesMode === 'normal') {
+                particlesMode = 'crazy';
+                startParticles(); // Start particles in crazy mode immediately after toggling
+            } else {
+                particlesMode = 'normal';
+            }
+        }
+        function changeGif() {
+            const gifImg = document.getElementById('gif-img');
+            // Replace 'newgif.gif' with the path to your new GIF
+            gifImg.src = "output-onlinegiftools (2).gif";
+        }
+
+        // Event listener for the Yes button
+        document.getElementById('yes-button').addEventListener('click', changeGif);
+        // Function to add more GIFs to the webpage
+        function addMoreGifs() {
+            const gifContainer = document.getElementById('gif-container');
+            const screenWidth = window.innerWidth;
+
+            // Define the positions for mobile and non-mobile devices
+            let leftPosition, rightPosition, topPosition, width;
+            if (screenWidth <= 768) { // Adjust this threshold as needed for your design
+                topPosition = 'calc(100% - 100px)'; // Position below the buttons for mobile devices
+                leftPosition = '50%'; // Center horizontally
+                rightPosition = '50%'; // Center horizontally
+                width = '200px';
+            } else {
+                leftPosition = '200px'; // Position to the left for non-mobile devices
+                rightPosition = '200px'; // Position to the right for non-mobile devices
+                topPosition = '50%'; // Default top position for non-mobile devices
+                width = '300px';
+            }
+
+            // Create and position the first GIF
+            const leftGif = document.createElement('img');
+            leftGif.src = "output-onlinegiftools (3).gif"; // Replace 'leftgif.gif' with the path to your left GIF
+            leftGif.style.position = 'absolute';
+            leftGif.style.left = leftPosition;
+            leftGif.style.top = topPosition;
+            leftGif.style.width= width;
+            leftGif.style.transform = 'translate(-50%, -50%)'; // Center horizontally and vertically
+            gifContainer.appendChild(leftGif);
+
+            // Create and position the second GIF
+            const rightGif = document.createElement('img');
+            rightGif.src = "output-onlinegiftools (3).gif"; // Replace 'rightgif.gif' with the path to your right GIF
+            rightGif.style.position = 'absolute';
+            rightGif.style.right = rightPosition;
+            rightGif.style.top = topPosition;
+            rightGif.style.width = width;
+            rightGif.style.transform = 'translate(50%, -50%)'; // Center horizontally and vertically
+            gifContainer.appendChild(rightGif);
+        }
+
+        let gifsAdded = false; // Flag to track whether GIFs have been added
+
+        document.getElementById('yes-button').addEventListener('click', function() {
+            const backgroundMusic = document.getElementById('background-music');
+            backgroundMusic.play();
+            if (!gifsAdded) { // Check if GIFs have not been added yet
+                addMoreGifs(); // Add GIFs
+                gifsAdded = true; // Set the flag to true to indicate GIFs have been added
+            }
+            changeGif(); // Change the main GIF after saying Yes
+        });
+        
+     
+        let textInterval; // Declare a variable to hold the interval ID
+
+        // Function to start cycling through text
+        function startTextCycle() {
+            const words = ['Love', 'Tikilushe', 'Buba jeme', 'Dasuri', 'Bukuroshe'];
+            const elementId = 'valentineText';
+            const interval = 2000;
+
+            const element = document.getElementById(elementId);
+            let currentIndex = 0;
+
+            textInterval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % words.length;
+                element.textContent = `Will you be my Valentine ${words[currentIndex]} ?`;
+            }, interval);
+        }
+
+        // Function to stop cycling through text
+        function stopTextCycle() {
+            clearInterval(textInterval);
+            const valentineText = document.getElementById('valentineText');
+            valentineText.innerHTML = "Thank you for saying Yes!<br>I Loveee Youuu Soo Muchhh"; // Update text content here
+        }
+
+        // Event listener for the Yes button
+        document.getElementById('yes-button').addEventListener('click', function() {
+            stopTextCycle();
+            changeGif(); // Change GIF after saying Yes
+            document.getElementById('yes-button').remove(); // Remove the "Yes" button
+            document.getElementById('no-button').remove(); // Remove the "No" button
+        });
+        
+        // Event listener for the No button (just an example)
+        document.getElementById('no-button').addEventListener('click', function() {
+            startTextCycle(); // Start text cycling again if No is clicked
+        });
+
+        // Initial start of text cycling
+        startTextCycle();
+
+    </script>
+</body>
+</html>
+ 

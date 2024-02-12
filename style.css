@@ -1,0 +1,124 @@
+
+@font-face {
+    font-family: 'YourFontName';
+    src: url("Agbalumo-Regular.ttf") format('truetype'); /* Adjust the path and format accordingly */
+    /* You can add other font formats here as well */
+}
+body {
+    cursor: url("rsz_1rsz_cursor.png"),auto ;
+    background-color: #ffc0cb; /* Light Pink */
+    margin: 0;
+    padding: 0;
+    font-family: 'YourFontName';
+    height: 100vh; /* Make sure the background covers the entire viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    text-align: center;
+    position: relative; /* Make the container relatively positioned */
+    z-index: 1; /* Ensure the text is on top of other elements */
+}
+
+.gif-overlay {
+    position: fixed; /* Position the GIF absolutely within its container */
+    top: 5%; /* Position the GIF at the top of the container */
+    left: 50%; /* Place the GIF at the horizontal center */
+    transform: translateX(-50%); /* Center the GIF horizontally */
+    z-index: 2; /* Ensure the GIF is on top of the text */
+    
+}
+
+
+/* Styling for buttons */
+.button {
+    font-family: 'YourFontName';
+    padding: 6px 25px;
+    margin: 20px;
+    font-size: 20px;
+    cursor: url("rsz_1rsz_cursor.png"),auto ;
+    border: 2px solid white;
+}
+
+
+#yes-button {
+    background-color: transparent;
+    position: relative;
+    color: white; 
+    border-radius: 20% 20%;
+    z-index: 1;
+}
+
+#yes-button:hover
+{
+    background-color:#FC8EAC ;
+}
+
+
+#no-button {
+    background-color: transparent;
+    border-radius: 20% 20%;
+    color: white;
+}
+#no-button:hover
+{
+    background-color: #FC8EAC;
+}
+
+/* Particle Button CSS */
+.particle-button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    border: 2px solid white;
+    color: white;
+    background-color: transparent;
+    position: relative;
+    z-index: 1; /* Ensure the button is above particles */
+}
+
+#particles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Ensure the particles container doesn't intercept mouse events */
+    z-index: 0; /* Ensure particles are below the button */
+    overflow: hidden; /* Hide particles outside the container */
+}
+
+.particle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url("rsz_1rsz_cursor.png"); /* Image of heart */
+    background-size: cover;
+    animation: particleAnimation 1s forwards;
+    opacity: 0; /* Initially hide particles */
+}
+
+@keyframes particleAnimation {
+    from {
+        opacity: 100;
+        transform: translateY(100vh);
+    }
+    to {
+        opacity: 100;
+        transform: translateY(-150px);
+    }
+}
+
+@keyframes particleAnimationCrazy {
+    from {
+        opacity: 100;
+        transform: translateY(100vh);
+    }
+    to {
+        opacity: 100;
+        transform: translateY(-150px);
+    }
+}
